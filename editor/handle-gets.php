@@ -29,13 +29,27 @@ if(isset($_GET['data']))
  
 $int_widgetId = 4;
 $aResult = array("data" => "預設", "id" => "$int_widgetId");
-$path_widget = "../widgets/$int_widgetId/Info.plist";
+$path_widget = "../widgets/$int_widgetId.wdgt/Info.plist";
 
 /*
- *測試
+ *下載zip
+*sfile，dfile
 */
+if (isset($_GET['mode']) && $_GET['mode'] === "test") {
+	
+	
+	
+	//$post_data = array("json"=>"$sName, $dName, $iId","id"=>1);
+	$post_data = array("json"=>"test","id"=>0);
+	echo json_encode($post_data);
+	exit();
+}//get end
 
-if (isset($_GET['mode']) && $_GET['mode'] === "move") {
+/*
+ *圖片上
+ *sfile，dfile
+*/
+else if (isset($_GET['mode']) && $_GET['mode'] === "move") {
 	$sName = '';
 	$dName = '';
 	if(isset($_GET['sfile']))

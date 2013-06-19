@@ -24,9 +24,12 @@
 		<script type="text/javascript" src="editor/handle-file.js"></script>
 		<script type="text/javascript">
 			var ary_imgs = new Array("bg.jpg", "player.png", "fruit1.png", "game over.png", "play.png");
-			var int_widgetId = 0;
+			var int_widgetId = 11;
 			
-			int_widgetId = getValue('id');
+			if(getValue('id') != "")
+				int_widgetId = getValue('id');
+				
+			//alert(int_widgetId );
 
 			function setLook() {
 				$('img').each(function(index) {
@@ -54,16 +57,15 @@
 							$('body').append(file.name);
 
 							var mjson = new Object();
-							mjson.wdid = 11;
+							mjson.wdid = int_widgetId;
 							mjson.mode = 'move';
 							mjson.data = 'data';
 							mjson.sfile = file.name;
 							mjson.dfile = 'imgs/' + ary_imgs[0];
-
+							
 							myGet(mjson, function(data) {
 								//alert('成功回傳');
-								alert(data.json + data.id);
-								mfunction(data);
+								//alert(data.json + data.id);
 							});
 
 						});
@@ -80,7 +82,7 @@
 							$('body').append(file.name);
 
 							var mjson = new Object();
-							mjson.wdid = 11;
+							mjson.wdid = int_widgetId;
 							mjson.mode = 'move';
 							mjson.data = 'data';
 							mjson.sfile = file.name;
@@ -89,7 +91,7 @@
 							myGet(mjson, function(data) {
 								//alert('成功回傳');
 								alert(data.json + data.id);
-								mfunction(data);
+								//mfunction(data);
 							});
 
 						});
@@ -106,7 +108,7 @@
 							$('body').append(file.name);
 
 							var mjson = new Object();
-							mjson.wdid = 11;
+							mjson.wdid = int_widgetId;
 							mjson.mode = 'move';
 							mjson.data = 'data';
 							mjson.sfile = file.name;
@@ -115,7 +117,7 @@
 							myGet(mjson, function(data) {
 								//alert('成功回傳');
 								alert(data.json + data.id);
-								mfunction(data);
+								//mfunction(data);
 							});
 
 						});
@@ -132,7 +134,7 @@
 							$('body').append(file.name);
 
 							var mjson = new Object();
-							mjson.wdid = 11;
+							mjson.wdid = int_widgetId;
 							mjson.mode = 'move';
 							mjson.data = 'data';
 							mjson.sfile = file.name;
@@ -141,7 +143,7 @@
 							myGet(mjson, function(data) {
 								//alert('成功回傳');
 								alert(data.json + data.id);
-								mfunction(data);
+								//mfunction(data);
 							});
 
 						});
@@ -158,16 +160,15 @@
 							$('body').append(file.name);
 
 							var mjson = new Object();
-							mjson.wdid = 11;
+							mjson.wdid = int_widgetId;
 							mjson.mode = 'move';
 							mjson.data = 'data';
 							mjson.sfile = file.name;
 							mjson.dfile = 'imgs/' + ary_imgs[4];
 
 							myGet(mjson, function(data) {
-								//alert('成功回傳');
-								alert(data.json + data.id);
-								mfunction(data);
+								alert('成功回傳');
+								//alert(data.json + data.id);
 							});
 
 						});
@@ -201,7 +202,7 @@
 				value = unescape(value);
 				value.replace(/\+/g, " ");
 				return value;
-			};
+			}
 		</script>
 		<style type="text/css">
 			body {

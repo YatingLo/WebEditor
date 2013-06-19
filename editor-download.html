@@ -1,30 +1,81 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>預覽與下載</title>
+	<head>
+		<meta charset="utf-8">
+		<title>預覽與下載</title>
 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script type="text/javascript" src="editor/handle-file.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script type="text/javascript" src="editor/handle-file.js"></script>
 
-<script type="text/javascript">
-	var oldLoad = window.onload() || function(){};
-	window.onload = function (){
-		oldLoad();
-		
-		alert($('#demo').prop('scrollHeight'));
-		$('#demo').height($('#demo').prop('scrollHeight'));
-		$('#demo').height(1024);
-	};
-</script>
-</head>
+		<script type="text/javascript">
+			var ob_pro = new Object();
+			ob_pro.wdid = 0;
 
-<body>
-<div>
-<button>產生下載檔案</button>
-</div>
-<iframe id="demo" src="./widgets/11.wdgt/index.html" width="750" height="1000" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>
+			$(function() {'use strict';
+				//var int_wdid = 0;
 
-</body>
+				if (getValue('id') != "")
+					ob_pro.wdid = getValue('id');
+
+				alert(ob_pro.wdid);
+				$('#test').click(function() {
+					sendClick(ob_pro.wdid);
+				});
+			});
+
+			function sendClick(wdid) {
+				//alert(wdid);
+				var mjson = new Object();
+				mjson.wdid = 11;
+				mjson.mode = 'down';
+				mjson.data = 'test';
+
+				alert('click');
+
+				myGet(mjson, function(data) {
+					//alert('成功回傳');
+					alert(data.json + data.id);
+					mfunction(data);
+				});
+			}
+
+			function myGet(mjson, mfunction) {
+				$.getJSON('editor/handle-gets.php', mjson, function(data) {
+					mfunction(data);
+				});
+			}
+
+			function getValue(varname) {
+				var url = window.location.href;
+				var qparts = url.split("?");
+				if (qparts.length == 0) {
+					return "";
+				}
+				var query = qparts[1];
+				var vars = query.split("&amp;");
+				var value = "";
+				for ( i = 0; i < vars.length; i++) {
+					var parts = vars[i].split("=");
+					if (parts[0] == varname) {
+						value = parts[1];
+						break;
+					}
+				}
+				value = unescape(value);
+				value.replace(/\+/g, " ");
+				return value;
+			};
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<button id="test">
+				產生下載檔案
+			</button>
+		</div>
+		<iframe id="demo" src="./widgets/11.wdgt/index.html" width="768" height="1000" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>
+
+	</body>
 </html>
