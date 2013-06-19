@@ -1,8 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<?php
-	$int_widgetId = 0;
-	$int_widgetType = 0; 
-?>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,12 +15,61 @@
 
 		<!-- 自己的 -->
 		<script type="text/javascript">
+			var aType = new Array();
+			aType[1] = "自我測驗";
+			aType[2] = "傾斜遊戲";
+		
 			var oldLoad = window.onload ||
 			function() {};
 			window.onload = function() {
 				oldLoad();
-				
+				loadTable()
 			};
+			
+			function loadTable(iWidgetId) {
+				//取資料庫列表
+				var data_send = new Object();
+				//data_send.wdid = iWidgetId;
+				data_send.mode = 'table_widget'; 
+				myGet(data_send, function (data){
+					alert("回傳資料："+data.length);
+					//alert("data:"+data[0].data);
+					$('body').append(JSON.stringify(data));
+
+					//alert("回傳資料：");
+					showTable(data);
+				});
+			}
+			
+			function showTable(data) {
+				var list;
+				for(var i = 0;i < data.length; ++i) {
+					list = list + '<li><div class="id">'+data[i].id+'</div>'+
+					'<div class="name">'+data[i].name+'</div>'+
+					'<div class="type">'+aType[data[i].type_id]+'</div>'+
+					'<div class="time">'+data[i].date+'</div>'+
+					'<div class="button">'+
+					'<span onclick="editWidget('+data[i].id+','+data[i].type_id+')">編輯</span>'+
+					'<span onclick="deleteWidget('+data[i].id+')">刪除</span>'+
+					'</div></li>';
+				}
+				$('.list ul').html(list);
+			}
+			
+			function deleteWidget(id){
+				alert('刪除id:'+id);
+			}
+			
+			function editWidget(id, type){
+				alert('編輯id:'+id+'type:'+type);
+			}
+			
+			function myGet(mjson, mfunction) {
+				$.getJSON('editor/handle-gets.php', mjson, function(data) {
+					mfunction(data);
+				});
+			}
+
 		</script>
 	</head>
 	<body>
@@ -61,7 +106,7 @@
             <div class="type">類別</div>
             <div class="time">時間</div>
             <div class="button">
-                	<span>編輯</span>
+                	<span onclick="editWidget(1)">編輯</span>
                     <span>刪除</span>
             </div>
        	  </li>
@@ -83,7 +128,8 @@
                 	<span>編輯</span>
                     <span>刪除</span>
             </div>
-       	  </li><li>
+       	  </li>
+       	  <li>
             <div class="name">測驗</div>
             <div class="id">id</div>
             <div class="type">類別</div>
@@ -92,7 +138,8 @@
                 	<span>編輯</span>
                     <span>刪除</span>
             </div>
-       	  </li><li>
+       	  </li>
+       	  <li>
             <div class="name">測驗</div>
             <div class="id">id</div>
             <div class="type">類別</div>

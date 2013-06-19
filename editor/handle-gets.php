@@ -23,6 +23,23 @@ $aResult = array("data" => "預設", "id" => "$int_widgetId");
 $path_widget = "../widgets/$int_widgetId.wdgt/Info.plist";
 
 /*
+ *取widget列表
+*/
+if (isset($_GET['mode']) && $_GET['mode'] === "table_widget") {
+	$dbHandle = new HandleDB;
+	
+	$query = "SELECT * FROM wd_widgets";
+	$result = mysql_query($query) or die(mysql_error());
+	
+	while($row=mysql_fetch_assoc($result)){
+		$output[]=$row;
+	}
+	print(json_encode($output));
+	
+	exit();
+}//get end
+
+/*
  *刪除data列表
 */
 if (isset($_GET['mode']) && $_GET['mode'] === "delete_data") {

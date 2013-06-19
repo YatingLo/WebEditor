@@ -17,6 +17,9 @@
 
 				if (getValue('id') != "")
 					ob_pro.wdid = getValue('id');
+					
+				var demoLink = './widgets/'+ob_pro.wdid+'.wdgt/index.html';
+				$('#demo').attr('src',demoLink);
 
 				alert(ob_pro.wdid);
 				$('#test').click(function() {
@@ -76,7 +79,6 @@
 			</button>
 			<span id='backLink'></span>
 		</div>
-		<iframe id="demo" src="./widgets/11.wdgt/index.html" width="768" height="1000" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>
-
+			<iframe id="demo" src="./widgets/11.wdgt/index.html" width="768" height="1000" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>
 	</body>
 </html>
