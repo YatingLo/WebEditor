@@ -7,7 +7,7 @@
  * @subpackage plist.examples
  */
 
-require_once("mysql.inc.php");
+//require_once("mysql.inc.php");
 include("handle-db.php");
 include("handle-file.php");
 
@@ -23,6 +23,40 @@ $aResult = array("data" => "預設", "id" => "$int_widgetId");
 $path_widget = "../widgets/$int_widgetId.wdgt/Info.plist";
 
 /*
+ *刪除data列表
+*/
+if (isset($_GET['mode']) && $_GET['mode'] === "delete_data") {
+	if(isset($_GET['did']))
+		$idataId = $_GET['did'];
+	$dbHandle = new HandleDB;
+	$query = "DELETE FROM wd_widget_data WHERE id = $iId";
+	$result = mysql_query($query) or die(mysql_error());
+	
+	$post_data = array("json"=>"test","id"=>0);
+	echo json_encode($post_data);
+	//echo $result;
+	exit();
+}//get end
+
+/*
+ *取data列表
+*/
+if (isset($_GET['mode']) && $_GET['mode'] === "table_data") {
+	$dbHandle = new HandleDB;
+	//$aResult = $dbHandle->sql_select($dbHandle->tbWidget);
+	
+	$query = "SELECT * FROM wd_widget_data WHERE wd_id = $iId";
+	$result = mysql_query($query) or die(mysql_error());
+	
+	while($row=mysql_fetch_assoc($result)){
+		$output[]=$row;
+	}
+	print(json_encode($output));
+	
+	exit();
+}//get end
+
+/*
  *下載zip
 *sfile，dfile
 */
@@ -30,7 +64,6 @@ if (isset($_GET['mode']) && $_GET['mode'] === "down") {
 	
 	$carPart = new HandleFile;
 	$resLink = $carPart-> project_download($iId);
-	
 	
 	//$post_data = array("json"=>"$sName, $dName, $iId","id"=>1);
 	$post_data = array("json"=>"$resLink","id"=>"$iId");
@@ -40,7 +73,7 @@ if (isset($_GET['mode']) && $_GET['mode'] === "down") {
 }//get end
 
 /*
- *圖片上
+ *圖片上傳
  *sfile，dfile
 */
 if (isset($_GET['mode']) && $_GET['mode'] === "move") {
@@ -66,63 +99,15 @@ if (isset($_GET['mode']) && $_GET['mode'] === "move") {
 }//get end
 
 /*
- *下載zip
-*sfile，dfile
+ *測試
 */
 if (isset($_GET['mode']) && $_GET['mode'] === "test") {
-
-
 
 	//$post_data = array("json"=>"$sName, $dName, $iId","id"=>1);
 	$post_data = array("json"=>"test","id"=>0);
 	echo json_encode($post_data);
 	exit();
 }//get end
-
-class Car{
-	var $testData = "";
-	
-	public function testData(){
-		$post_data = array("json"=>"testback","id"=>0);
-		return json_encode($post_data);
-	}
-	
-	public function project_download($id){
-		//echo "download：";
-		$url = "../widgets/".$id.".wdgt";
-		$zipName = "../widgets/".$id.".zip";
-		$zip = new ZipArchive();
-		if ($zip->open($zipName, ZipArchive::CREATE) === TRUE) {
-			$from_files = scandir($url);
-			$this->add2zip($zip, $url);
-			$zip->close();
-			//echo 'ok';
-			return '<a href="'.$zipName.'">下載</a>';
-		} else {
-			//echo 'failed';
-			return false;
-		}
-	}
-	
-	//檔案加入壓縮檔中
-	public function add2zip($zip,$url) {
-		$from_files = scandir($url);  
-
-        if( ! empty($from_files)){  
-			foreach ($from_files as $file){  
-				if($file == '.' || $file == '..' ){  
-					continue;  
-				}  
-				if(is_dir($url.'/'.$file)){
-					$this->add2zip($zip, $url.'/'.$file);
-				}else{
-					$zip->addFile($url.'/'.$file);  
-				}  
-			}  
-		}
-        return $zip ;
-	}
-}
 
 ?>
 

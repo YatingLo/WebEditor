@@ -1,6 +1,6 @@
 <title>檔案處理</title>
 <?php
-include_once("mysql.inc.php");
+//include_once("mysql.inc.php");
 include("handle-db.php");
 include("handle-file.php");
 
@@ -68,11 +68,11 @@ switch ($sAction) {
 }
 
 /*測試*/
+
+//$fileHandle = new HandleFile();
+$dbHandle = new HandleDB;
+
 /*
-$fileHandle = new HandleFile();
-//$dbHandle = new HandleDB();
-
-
 $sData = json_encode(array('sfile'=>'apple_ex.png', 'dfile'=>"dfile"));
 $fileName = json_decode($sData);
 $fileName = get_object_vars($fileName);

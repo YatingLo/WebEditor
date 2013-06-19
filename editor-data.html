@@ -1,57 +1,106 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>上傳資料管理</title>
+	<head>
+		<meta charset="utf-8">
+		<title>上傳資料管理</title>
 
-<style type="text/css">
-	table {
-		width:500px;
-		border:0px;
-	}
-</style>
+		<style type="text/css">
+			table {
+				width: 500px;
+				border: 0px;
+			}
+		</style>
 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script type="text/javascript" src="editor/handle-file.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		//alert('test');
-		//sendHandle.wd_id = sendHandle.getValue('id');
-		
-		//alert(sendHandle.wd_id);
-		/*
-		//和伺服器溝通
-		sendHandle.myPost(sendHandle.action.listData, sendHandle.wd_id, null, function(){
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script type="text/javascript" src="editor/handle-file.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				//alert('test');
+				
+				var iWidgetId = 0;
+				if(getValue('id'))
+					iWidgetId = getValue('id');
+				
+				alert('id:'+iWidgetId);
+				
+				loadTable(iWidgetId);
+				
+				//alert('test');
+			});
 			
-		});
-		*/
-		var testid = 1;
-		
-		var list = '<table cellpadding="0" cellspacing="0"><tr><td bgcolor="#CCCCCC">名稱</td><td bgcolor="#CCCCCC">分數</td><td  bgcolor="#CCCCCC">&nbsp;</td></tr>';
-		for(;testid<10; testid+=1){
-			var list = list + '<tr><td>test</td><td>50</td><td><a href="javascript:dataDelete('+testid+')">刪除</a></td></tr>';
-		}
-		
-		var testid = 2;
-		var list = list + '<tr><td>test</td><td>50</td><td><a href="javascript:dataDelete('+testid+')">刪除</a></td></tr>';
-		var list = list + "</table>";
-		$('body').append(list);
-		
-		//alert('test');
-	});
-	
-	function dataDelete(id){
-		alert('刪除id='+id);
-	}
-	
-	//alert(sendHandle.wd_id);
-	//getValue('id');
-</script>
+			function loadTable(iWidgetId) {
+				//取資料庫列表
+				var data_send = new Object();
+				data_send.wdid = iWidgetId;
+				data_send.mode = 'table_data'; 
+				myGet(data_send, function (data){
+					//alert("回傳資料："+data.length);
+					//alert("data:"+data[0].data);
+					//$('body').append(JSON.stringify(data));
 
-</head>
+					//alert("回傳資料：");
+					showTable(data);
+				});
+			}
+			
+			function showTable(data) {
+				var list = '<table cellpadding="0" cellspacing="0"><tr><td bgcolor="#CCCCCC">名稱</td><td bgcolor="#CCCCCC">分數</td><td  bgcolor="#CCCCCC">上傳時間</td><td  bgcolor="#CCCCCC">&nbsp;</td></tr>';
+				for(var i = 0;i<data.length; ++i) {
+					temp = JSON.parse(data[i].data);
+					list = list + '<tr><td>'+temp.name+'</td><td>'+temp.score+'</td><td>'+data[i].date+'</td><td><a href="javascript:dataDelete(' + data[i].id + ')">刪除</a></td></tr>';
+				}
+				list = list + "</table>";
+				$('body').html(list);
+			}
 
-<body>
+			function dataDelete(id) {
+				alert('刪除id=' + id);
+				var data_send = new Object();
+				data_send.wdid = id;
+				data_send.mode = 'delete_data'; 
+				myGet(data_send, function (data){
+					//alert("回傳資料："+data.length);
+					//alert("data:"+data[0].data);
+					//$('body').append(JSON.stringify(data));
+					//loadTable(iWidgetId);
+					//alert("回傳資料："+getValue('id'));
+					loadTable(getValue('id'));
+					//showTable(data);
+				});
+			}
 
-</body>
+			function myGet(mjson, mfunction) {
+				$.getJSON('editor/handle-gets.php', mjson, function(data) {
+					mfunction(data);
+				});
+			}
+
+			function getValue(varname) {
+				var url = window.location.href;
+				var qparts = url.split("?");
+				if (qparts.length == 0) {
+					return "";
+				}
+				var query = qparts[1];
+				var vars = query.split("&amp;");
+				var value = "";
+				for ( i = 0; i < vars.length; i++) {
+					var parts = vars[i].split("=");
+					if (parts[0] == varname) {
+						value = parts[1];
+						break;
+					}
+				}
+				value = unescape(value);
+				value.replace(/\+/g, " ");
+				return value;
+			}
+		</script>
+
+	</head>
+
+	<body>
+
+	</body>
 </html>

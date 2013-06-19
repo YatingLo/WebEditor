@@ -35,7 +35,8 @@
 
 				myGet(mjson, function(data) {
 					//alert('成功回傳'+data.json);
-					$('#backLink').html(data.json);
+					var slink = '<a href="widgets/'+data.id+'.zip">下載</a>';
+					$('#backLink').html(slink);
 				});
 			}
 

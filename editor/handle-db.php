@@ -1,5 +1,5 @@
 <?php
-    //phpinfo();
+ //phpinfo();
 include_once("mysql.inc.php");
 
 class HandleDB{
@@ -9,12 +9,16 @@ class HandleDB{
 	var $tbData = "wd_widget_data";
 	
 	var $testData = '{"name":"你好", "score": 25}';
+	
+	public function HandleDB(){
+	}
 		
-	function sql_select($tableName) {
+	public function sql_select($tableName) {
 		//echo "<table>";
 		//$tableName = "wd_widgets";
 		$sql = "SELECT * FROM ".$tableName;
 		$result = mysql_query($sql);
+		
 		return $result;
 		/*
 		while($row =  mysql_fetch_array($result)){
@@ -24,7 +28,7 @@ class HandleDB{
 		return $result;
 		*/
 	}
-	function sql_select_databyid($wdid){
+	public function sql_select_databyid($wdid){
 		$sql = "SELECT * FROM wd_widget_data ";
 		$sql = $sql."WHERE wd_id ='"+$wdid+"'";
 		$result = mysql_query($sql);
@@ -34,7 +38,7 @@ class HandleDB{
 	/*新增之後回傳auto產生的id值
 	*種類、部件、部件資料
 	*/
-	function sql_insert_type($name, $type) {
+	public function sql_insert_type($name, $type) {
 			$sql = "INSERT INTO wd_widget_type (id ,name) VALUES (NULL, '".$type."')";
 			if(@mysql_query($sql)){
 				return mysql_insert_id();
@@ -42,7 +46,7 @@ class HandleDB{
 				return false;
 			}
 	}
-	function sql_insert_widget($name, $type) {
+	public function sql_insert_widget($name, $type) {
 			$taiwan =  mktime(date('H')+14, date('i'), date('s'), date('m'), date('d'), date('Y'));
 			$time = date("Y-m-d H:i:s", $taiwan);
 			$sql = "INSERT INTO wd_widgets (name, type_id, date) ";
@@ -53,7 +57,7 @@ class HandleDB{
 				return false;
 			}
 	}
-	function sql_insert_data($id, $data) {
+	public function sql_insert_data($id, $data) {
 			//時區設定
 			$taiwan =  mktime(date('H')+14, date('i'), date('s'), date('m'), date('d'), date('Y'));
 			$time = date("Y-m-d H:i:s", $taiwan);
@@ -68,27 +72,27 @@ class HandleDB{
 	/*新增之後回傳auto產生的id值
 	*部件、部件資料
 	*/
-	function sql_delete_widget($id){
-		$sql = "DELETE FROM wd_widgets WHERE id = '"+$id+"'";
+	public function sql_delete_widget($id){
+		$sql = "DELETE FROM wd_widgets WHERE id = $id";
 		$result = mysql_query($sql);
 		return $result;
 	}
 	//刪除資訊
-	function sql_delete_data($id){
-		$sql = "DELETE FROM wd_widget_data WHERE id = '"+$id+"'";
-		$result = mysql_query($sql);
+	public function sql_delete_data($id){
+		$sql = "DELETE FROM wd_widget_data WHERE id = $id";
+		$result = mysql_query($sql) or die(mysql_error());
 		return $result;
 	}
 	
 	//修改名稱
-	function sql_update_widget($id, $name){
+	public function sql_update_widget($id, $name){
 		$sql = "INSERT INTO wd_widgets (wd_id,data,date) ";
 		$sql = $sql."VALUES (".$id.",'".$data."','".$time."')";
 		$result = mysql_query($sql);
 		return $result;
 	}
 	
-	function show_table(){
+	public function show_table($result){
 		echo "<table>";
 		while($row =  mysql_fetch_array($result)){
 			$table = "<tr>";
@@ -99,6 +103,13 @@ class HandleDB{
 			echo $table;
 		}
 		echo "</table>";
+	}
+	//sql obejct to json
+	public function mysql2json($result){
+	     while($row=mysql_fetch_assoc($result)){
+			$output[]=$row;
+		 }
+	     return(json_encode($output));
 	}
 }
 ?>
