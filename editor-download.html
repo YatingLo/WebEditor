@@ -27,16 +27,15 @@
 			function sendClick(wdid) {
 				//alert(wdid);
 				var mjson = new Object();
-				mjson.wdid = 11;
+				mjson.wdid = ob_pro.wdid;
 				mjson.mode = 'down';
 				mjson.data = 'test';
 
 				alert('click');
 
 				myGet(mjson, function(data) {
-					//alert('成功回傳');
-					alert(data.json + data.id);
-					mfunction(data);
+					//alert('成功回傳'+data.json);
+					$('#backLink').html(data.json);
 				});
 			}
 
@@ -74,6 +73,7 @@
 			<button id="test">
 				產生下載檔案
 			</button>
+			<span id='backLink'></span>
 		</div>
 		<iframe id="demo" src="./widgets/11.wdgt/index.html" width="768" height="1000" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>
 

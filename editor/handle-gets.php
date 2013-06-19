@@ -6,16 +6,7 @@
  * @package plist
  * @subpackage plist.examples
  */
-namespace CFPropertyList;
 
-// just in case...
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
-
-/**
- * Require CFPropertyList
- */
-require_once (__DIR__ . '~/../classes/CFPropertyList/CFPropertyList.php');
 require_once("mysql.inc.php");
 include("handle-db.php");
 include("handle-file.php");
@@ -35,13 +26,16 @@ $path_widget = "../widgets/$int_widgetId.wdgt/Info.plist";
  *下載zip
 *sfile，dfile
 */
-if (isset($_GET['mode']) && $_GET['mode'] === "test") {
+if (isset($_GET['mode']) && $_GET['mode'] === "down") {
 	
+	$carPart = new HandleFile;
+	$resLink = $carPart-> project_download($iId);
 	
 	
 	//$post_data = array("json"=>"$sName, $dName, $iId","id"=>1);
-	$post_data = array("json"=>"test","id"=>0);
+	$post_data = array("json"=>"$resLink","id"=>"$iId");
 	echo json_encode($post_data);
+	//echo $carPart->testData();
 	exit();
 }//get end
 
@@ -49,7 +43,7 @@ if (isset($_GET['mode']) && $_GET['mode'] === "test") {
  *圖片上
  *sfile，dfile
 */
-else if (isset($_GET['mode']) && $_GET['mode'] === "move") {
+if (isset($_GET['mode']) && $_GET['mode'] === "move") {
 	$sName = '';
 	$dName = '';
 	if(isset($_GET['sfile']))
@@ -71,7 +65,64 @@ else if (isset($_GET['mode']) && $_GET['mode'] === "move") {
 	exit();
 }//get end
 
+/*
+ *下載zip
+*sfile，dfile
+*/
+if (isset($_GET['mode']) && $_GET['mode'] === "test") {
 
+
+
+	//$post_data = array("json"=>"$sName, $dName, $iId","id"=>1);
+	$post_data = array("json"=>"test","id"=>0);
+	echo json_encode($post_data);
+	exit();
+}//get end
+
+class Car{
+	var $testData = "";
+	
+	public function testData(){
+		$post_data = array("json"=>"testback","id"=>0);
+		return json_encode($post_data);
+	}
+	
+	public function project_download($id){
+		//echo "download：";
+		$url = "../widgets/".$id.".wdgt";
+		$zipName = "../widgets/".$id.".zip";
+		$zip = new ZipArchive();
+		if ($zip->open($zipName, ZipArchive::CREATE) === TRUE) {
+			$from_files = scandir($url);
+			$this->add2zip($zip, $url);
+			$zip->close();
+			//echo 'ok';
+			return '<a href="'.$zipName.'">下載</a>';
+		} else {
+			//echo 'failed';
+			return false;
+		}
+	}
+	
+	//檔案加入壓縮檔中
+	public function add2zip($zip,$url) {
+		$from_files = scandir($url);  
+
+        if( ! empty($from_files)){  
+			foreach ($from_files as $file){  
+				if($file == '.' || $file == '..' ){  
+					continue;  
+				}  
+				if(is_dir($url.'/'.$file)){
+					$this->add2zip($zip, $url.'/'.$file);
+				}else{
+					$zip->addFile($url.'/'.$file);  
+				}  
+			}  
+		}
+        return $zip ;
+	}
+}
 
 ?>
 

@@ -3,27 +3,21 @@
 /*
  *檔案處理
 */
-//require_once (__DIR__ . '~/../classes/CFPropertyList/CFPropertyList.php');
-class Car{
-	function Car(){
-	}
-	
-	function test(){
-	}
-}
-
-
 class HandleFile{
 	//widget的id,type,目的檔案名稱，來源檔案名稱
 	var $id, $type, $dFileName, $sFileName;
 	var $aType;
 	
-	function HandleFile(){
+	public function HandleFile(){
 		
 	}
 	
+	public function testData(){
+		$post_data = array("json"=>"testback","id"=>0);
+		return json_encode($post_data);
+	}
 	
-	function file_move_img($id, $sFileName, $dFileName) {
+	public function file_move_img($id, $sFileName, $dFileName) {
 		$url_source = "../classes/Jupload/server/php/files/".$sFileName;
 		$url_target = "../widgets/$id.wdgt/".$dFileName;
 		
@@ -41,7 +35,7 @@ class HandleFile{
 			return false;
 		}
 	}
-	function file_copy_sample($id, $type){
+	public function file_copy_sample($id, $type){
 		$url_source = "../widgets/".$this->aType[$type];
 		$url_target = "../widgets/".$id.".wdgt";
 		
@@ -49,11 +43,11 @@ class HandleFile{
       
         return $this->copy_dir($url_source, $url_target);
 	}
-	function project_delete($id){
+	public function project_delete($id){
 		$url = "../widgets/".$id.".wdgt";
 		return $this->deleteDirectory($url);
 	}
-	function project_download($id){
+	public function project_download($id){
 		//echo "download：";
 		$url = "../widgets/".$id.".wdgt";
 		$zipName = "../widgets/".$id.".zip";
@@ -69,19 +63,19 @@ class HandleFile{
 			return false;
 		}
 	}
-	function file_save_html($id, $fileString){
+	public function file_save_html($id, $fileString){
 		$url = "../widgets/".$id.".wdgt/index.html";
 		$dest =  fopen($url, 'w');
 		//return stream_copy_to_stream($fileString, $dest);
 		return file_put_contents($url, $fileString);
 	}
-	function file_save_plist($id){
+	public function file_save_plist($id){
 		
 	}
-	function file_read_plist($id){
+	public function file_read_plist($id){
 	}
 	//資料夾處理
-	function copy_dir($from_dir,$to_dir){  
+	public function copy_dir($from_dir,$to_dir){  
         if(!is_dir($from_dir)){  
             return false ;  
         }
@@ -107,7 +101,7 @@ class HandleFile{
         }
         return true ;
     }
-	function deleteDirectory($dir) {  
+	public function deleteDirectory($dir) {  
 	if (!file_exists($dir)) return true;  
 	if (!is_dir($dir) || is_link($dir)) return unlink($dir);  
 		foreach (scandir($dir) as $item) {  
@@ -120,7 +114,7 @@ class HandleFile{
 		return rmdir($dir);  
 	}
 	//檔案加入壓縮檔中
-	function add2zip($zip,$url) {
+	public function add2zip($zip,$url) {
 		$from_files = scandir($url);  
 
         if( ! empty($from_files)){  
