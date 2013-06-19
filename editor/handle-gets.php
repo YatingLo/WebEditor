@@ -31,7 +31,6 @@ if (isset($_GET['mode']) && $_GET['mode'] === "down") {
 	$carPart = new HandleFile;
 	$resLink = $carPart-> project_download($iId);
 	
-	
 	//$post_data = array("json"=>"$sName, $dName, $iId","id"=>1);
 	$post_data = array("json"=>"$resLink","id"=>"$iId");
 	echo json_encode($post_data);
