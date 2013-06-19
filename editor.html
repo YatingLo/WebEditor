@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php
+	$int_widgetId = 0;
+	$int_widgetType = 0; 
+?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>多媒體部件編輯</title>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<link type="text/css" rel="stylesheet" href="../classes/jquery-ui/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
+
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+		<!-- 自己的 -->
+		<script type="text/javascript">
+			var oldLoad = window.onload ||
+			function() {};
+			window.onload = function() {
+				oldLoad();
+
+				$('#tabs').tabs();
+				
+				$('div#tabs-1').html('<iframe class="demo" src="editor-info.html" width="800" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
+				$('div#tabs-2').html('<iframe class="demo" src="editor-widget-ac.html" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
+				$('div#tabs-3').html('<iframe class="demo" src="editor-download.html" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
+				$('div#tabs-4').html('<iframe class="demo" src="editor-data.html" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
+				var contentH = $('.demo').height();
+				$('.demo').attr('height',contentH);
+			};
+		</script>
+
+		<style type="text/css">
+			body {
+				max-width: 800px;
+				margin: 0 auto;
+				font-size: 1em;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<header>
+			<h1>多媒體部件編輯</h1>
+		</header>
+
+		<div id="content" style="float: left">
+
+			<div id="tabs">
+				<ul>
+					<li>
+						<a href="#tabs-1">設定檔</a>
+					</li>
+					<li>
+						<a href="#tabs-2">內容編輯</a>
+					</li>
+					<li>
+						<a href="#tabs-3">預覽</a>
+					</li>
+                    <li>
+						<a href="#tabs-4">上傳資料</a>
+					</li>
+				</ul>
+				<div id="tabs-1">
+
+				</div>
+				<div id="tabs-2">
+					
+				</div>
+				<div id="tabs-3">
+					
+				</div>
+                
+                <div id="tabs-4">
+					
+				</div>
+		  </div>
+		</div>
+	</body>
+</html>

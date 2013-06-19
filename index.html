@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>My Widget</title>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<link type="text/css" rel="stylesheet" href="../classes/jquery-ui/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
+
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="style/header.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script src="editor/handle-file.js"></script>
+
+		<!-- 自己的 -->
+		<script type="text/javascript">
+			var oldLoad = window.onload ||
+			function() {};
+			window.onload = function() {
+				oldLoad();
+				
+				var mjson = new Object();
+				mjson.wdid = 1;
+				mjson.mode = 'test';
+				mjson.data = 'data';
+				mjson.sfile = 'sfile';
+				mjson.dfile = 'dfile';
+				
+				myGet(mjson, function(data){
+					alert('成功回傳');
+					alert(data.json);
+					mfunction(data);
+				});
+				
+				/*
+				$.getJSON('editor/handle-gets.php', mjson, function(data) {
+					 alert('成功回傳');
+					 alert(data.json);
+				});
+				*/
+				/*
+				$.ajax({
+					type: 'POST', 
+					url: 'editor/handle-gets.php', 
+					crossDomain: true,
+					dataType: 'json',
+					data: 'action=sum&param1=' + param1 + '&param2=' + param2,
+					success: function(json) {
+						// and evoke client's function
+						alert('as;ldfkj;');
+					} 
+				});*/
+			};
+			
+			function myGet(mjson, mfunction){
+				$.getJSON('editor/handle-gets.php', mjson, function(data) {
+					 mfunction(data);
+				});
+			}
+		</script>
+	</head>
+	<body>
+	<div id="warp">
+      <header>
+                <h1>My Widget</h1>
+        <h4>我的多媒體部件</h4>
+      </header>
+      
+      <nav>
+              <ul>
+                    <a href="index.html"><li>系統介紹</li></a>
+                    <a href="intro.html"><li>使用說明</li></a>
+                    <a href="config.html"><li>編輯管理</li></a>
+                    <a href="link.html"><li>相關資源</li></a>
+               </ul>
+               <div style="clear:both"></div>
+            </nav>
+
+      <div id="content">
+                    <div id="wd_list"></div>
+            </div>
+	</div>
+	</body>
+    <footer>
+    	
+    </footer>
+</html>

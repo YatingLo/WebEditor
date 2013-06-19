@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php
+	$int_widgetId = 0;
+	$int_widgetType = 0; 
+?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>編輯管理</title>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<link type="text/css" rel="stylesheet" href="../classes/jquery-ui/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
+
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" href="style/header.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+		<!-- 自己的 -->
+		<script type="text/javascript">
+			var oldLoad = window.onload ||
+			function() {};
+			window.onload = function() {
+				oldLoad();
+				
+			};
+		</script>
+	</head>
+	<body>
+	<div id="warp">
+      <header>
+                <h1>My Widget</h1>
+        <h4>我的多媒體部件</h4>
+      </header>
+      <nav>
+              <ul>
+                    <a href="index.html"><li>系統介紹</li></a>
+                    <a href="intro.html"><li>使用說明</li></a>
+                    <a href="config.html"><li>編輯管理</li></a>
+                    <a href="link.html"><li>相關資源</li></a>
+               </ul>
+               <div style="clear:both"></div>
+            </nav>
+      <div id="content">
+      	<div class="editor" style="padding-top:20px">
+        	<span class="id">id</span>
+            <span>
+            <input id="name" type="text" style="width:150px"></span>
+            <span><select id="type">
+            <option value="1">自我測驗</option>
+            <option value="2">傾斜遊戲</optoin>
+            </select></span>
+            <button>新增</button>
+        </div>
+        <div class="list">
+        <ul>
+       	  <li>
+          	<div class="id">id</div>
+            <div class="name">測驗</div>
+            <div class="type">類別</div>
+            <div class="time">時間</div>
+            <div class="button">
+                	<span>編輯</span>
+                    <span>刪除</span>
+            </div>
+       	  </li>
+          <li>
+            <div class="name">測驗</div>
+            <div class="id">id</div>
+            <div class="type">類別</div>
+            <div class="time">時間</div>
+            <div class="button">
+                	<span>編輯</span>
+                    <span>刪除</span>
+            </div>
+       	  </li><li>
+            <div class="name">測驗</div>
+            <div class="id">id</div>
+            <div class="type">類別</div>
+            <div class="time">時間</div>
+            <div class="button">
+                	<span>編輯</span>
+                    <span>刪除</span>
+            </div>
+       	  </li><li>
+            <div class="name">測驗</div>
+            <div class="id">id</div>
+            <div class="type">類別</div>
+            <div class="time">時間</div>
+            <div class="button">
+                	<span>編輯</span>
+                    <span>刪除</span>
+            </div>
+       	  </li><li>
+            <div class="name">測驗</div>
+            <div class="id">id</div>
+            <div class="type">類別</div>
+            <div class="time">時間</div>
+            <div class="button">
+                	<span>編輯</span>
+                    <span>刪除</span>
+            </div>
+       	  </li>
+        </ul>
+        </div><!--list-->
+      </div><!--content-->
+	</div>
+	</body>
+    <footer>
+    </footer>
+</html>

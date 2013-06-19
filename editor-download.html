@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>預覽與下載</title>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="editor/handle-file.js"></script>
+
+<script type="text/javascript">
+	var oldLoad = window.onload() || function(){};
+	window.onload = function (){
+		oldLoad();
+		
+		alert($('#demo').prop('scrollHeight'));
+		$('#demo').height($('#demo').prop('scrollHeight'));
+		$('#demo').height(1024);
+	};
+</script>
+</head>
+
+<body>
+<div>
+<button>產生下載檔案</button>
+</div>
+<iframe id="demo" src="./widgets/11.wdgt/index.html" width="750" height="1000" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>
+
+</body>
+</html>

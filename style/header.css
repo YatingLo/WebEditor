@@ -1,0 +1,64 @@
+@charset "utf-8";
+html, body { height: 100%; }
+
+.wrap { min-height: 100%; *display: table; /* For IE7 Hack */ *height: 100%; /* For IE7 Hack */ } 
+.main { overflow:auto; padding-bottom: 180px; } /* must be same height as the footer */ 
+footer { 
+	position: relative; 
+	margin-top: 10px; /* negative value of footer height */ 
+	height: 50px; 
+	clear:both;
+	background-color:#CCC;
+}
+
+body, header {
+	max-width: 800px;
+	margin: 0 auto;
+	font-size: 1em;
+}
+
+nav {
+	background-color:#CCC;
+}
+
+nav ul {
+	list-style:none;
+}
+
+nav li {
+	float:left;
+	padding: 10px;
+	color: black;
+}
+
+nav li:hover,  nav li:active{
+	background-color:#4F545E;
+	color:#CCC;
+}
+
+.list {
+	min-height:400px;
+}
+
+.list li{
+	float:left;
+	list-style:none;
+	width:150px;
+	height:150px;
+	border:1px dashed;
+	margin:5px;
+	padding:10px;
+	text-align:center;
+}
+
+.list .button {
+	position: relative; 
+	margin: 50px auto 0 auto;
+	font-size: 0.8em;
+}
+
+.list span {
+	background-color: #CCC;
+	padding: 5px;
+	margin:0 5px;
+}

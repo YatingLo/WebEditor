@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>自我測驗編輯</title>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<link type="text/css" rel="stylesheet" href="../classes/jquery-ui/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
+
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+		<!-- 自己的 -->
+		<script type="text/javascript" src="editor/editor-widget-quiz.js"></script>
+		<script type="text/javascript" src="classes/Validate/inputValue.js"></script>
+
+		<style type="text/css">
+			body {
+				width: 800px;
+				margin: 0 auto;
+				font-size: 1em;
+			}
+
+			#contentL, #contentR {
+				width: 49%;
+				float: left;
+				padding: 0 2px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<header>
+			<h1>自我測驗編輯</h1>
+		</header>
+
+		<div id="content" style="float: left">
+
+			<div id="contentL">
+
+			</div>
+			<div id="contentR">
+
+				<div id="tabs">
+					<ul>
+						<li>
+							<a href="#tabs-1">多選</a>
+						</li>
+						<li>
+							<a href="#tabs-2">單選</a>
+						</li>
+						<li>
+							<a href="#tabs-3">填空</a>
+						</li>
+						<li>
+							<a href="#tabs-4">標題</a>
+						</li>
+					</ul>
+					<div id="tabs-1">
+						<div id="quiz_multi" class="quiz_sample">
+							<!--多選題-->
+							<li>
+								<div class="quiz_string">
+									你要問的問題?
+								</div>
+								<form id="check">
+									<div class="choice">
+										<input type="checkbox" value="choice1" name="answer">
+										選項1
+										<input type="checkbox" value="choice2" name="answer">
+										選項2
+										<input type="checkbox" value="choice3" name="answer">
+										選項3
+										<input type="checkbox" value="choice4" name="answer">
+										選項4
+									</div>
+									<div class="quiz_ans">
+										answer=選項2&answer=選項3
+									</div>
+								</form>
+								<div class="quiz_comment">
+									問題相關註解
+								</div>
+							</li>
+						</div>
+						<div id="multi_edit">
+							<h3>設定題組內容</h3>
+							問題
+							<input type="text" id="multi_string" />
+							<br />
+							選項
+							<input type="text" id="multi_answer" />
+							<br />
+							註解
+							<input type="text" id="multi_comment" />
+							<br />
+							<form>答案 <span class="choice"></span></form>
+						</div>
+					</div>
+					<div id="tabs-2">
+						<div id="quiz_single1" class="quiz_sample">
+							<!--單選題-->
+							<li>
+								<div class="quiz_string">
+									你要問的問題?
+								</div>
+								<form>
+									<div class="choice">
+									<input type="radio" value="你說呢" name="answer">
+									你說呢
+									<input type="radio" value="你說呢" name="answer">
+									當然囉
+									<input type="radio" value="你說呢" name="answer">
+									討厭!!
+									<input type="radio" value="你說呢" name="answer">
+									choose6
+									</div>
+									<div class="quiz_ans">
+										choose1
+									</div>
+								</form>
+								<div class="quiz_comment">
+									問題相關註解
+								</div>
+							</li>
+						</div>
+						<div id="quiz_single2" class="quiz_sample">
+							<!--下拉單選題-->
+							<li>
+								<div class="quiz_string">
+									你要問的問題?
+								</div>
+								<form>
+									<select class="answer">
+										<option>初中 <option>choose1<option>高職 <option>專科
+									</select>
+									<div class="quiz_ans">
+										answer=初中
+									</div>
+								</form>
+								<div class="quiz_comment">
+									問題相關註解
+								</div>
+
+							</li>
+						</div>
+						<div id="single_edit">
+							<h3>設定題組內容</h3>
+							問題
+							<input type="text" id="single_string" />
+							<br />
+							選項
+							<input type="text" id="single_choice" />
+							<br />
+							註解
+							<input type="text" id="single_comment" />
+							<br />
+							<form>答案 <span class="choice"></span></form>
+						</div>
+					</div>
+
+					<div id="tabs-3">
+						<div id="quiz_blank" class="quiz_sample">
+							<!--填空-->
+							<li>
+								<div class="quiz_string">
+									你要問的問題?
+								</div>
+								<form>
+									<input name="answer" type="text">
+									<div class="quiz_ans">
+										answer=高中
+									</div>
+								</form>
+								<div class="quiz_comment">
+									問題相關註解
+								</div>
+
+							</li>
+						</div>
+						<div id="blank_edit">
+							<h3>設定題組內容</h3>
+							問題
+							<input type="text" id="blank_string" />
+							<br />
+							
+							<form>
+								<span>答案 </span><input type="text" name="answer" id="blank_answer" />
+							</form>
+							<br />
+							註解
+							<input type="text" id="blank_comment" />
+							<br />
+						</div>
+					</div>
+					<div id="tabs-4">
+						<div class="quiz_sample">
+							<h3>標題</h3>
+						</div>
+						<p>
+							設定標題文字
+							<input type="text" id="title_string" />
+						</p>
+					</div>
+				</div>
+				<button id="saveHtml">存檔</button>
+			</div>
+          <div style="clear:both">
+           	<!--<h2>準備存的文件檔</h2>-->
+            <div id="contentSave"></div>
+          </div>
+		</div>
+
+	</body>
+</html>

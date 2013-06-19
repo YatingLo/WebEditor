@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>上傳資料管理</title>
+
+<style type="text/css">
+	table {
+		width:500px;
+		border:0px;
+	}
+</style>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="editor/handle-file.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		//alert('test');
+		//sendHandle.wd_id = sendHandle.getValue('id');
+		
+		//alert(sendHandle.wd_id);
+		/*
+		//和伺服器溝通
+		sendHandle.myPost(sendHandle.action.listData, sendHandle.wd_id, null, function(){
+			
+		});
+		*/
+		var testid = 1;
+		
+		var list = '<table cellpadding="0" cellspacing="0"><tr><td bgcolor="#CCCCCC">名稱</td><td bgcolor="#CCCCCC">分數</td><td  bgcolor="#CCCCCC">&nbsp;</td></tr>';
+		for(;testid<10; testid+=1){
+			var list = list + '<tr><td>test</td><td>50</td><td><a href="javascript:dataDelete('+testid+')">刪除</a></td></tr>';
+		}
+		
+		var testid = 2;
+		var list = list + '<tr><td>test</td><td>50</td><td><a href="javascript:dataDelete('+testid+')">刪除</a></td></tr>';
+		var list = list + "</table>";
+		$('body').append(list);
+		
+		//alert('test');
+	});
+	
+	function dataDelete(id){
+		alert('刪除id='+id);
+	}
+	
+	//alert(sendHandle.wd_id);
+	//getValue('id');
+</script>
+
+</head>
+
+<body>
+
+</body>
+</html>

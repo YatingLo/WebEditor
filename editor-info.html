@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+input 限制
+http://tc.wangchao.net.cn/it/detail_75888.html
+-->
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>設定檔編輯</title>
+
+		<!-- Bootstrap CSS Toolkit styles -->
+		<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap.min.css">
+		<!-- Generic page styles -->
+		<link rel="stylesheet" href="classes/Jupload/css/style.css">
+		<!-- Bootstrap styles for responsive website layout, supporting different screen sizes -->
+		<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css">
+		<!-- Bootstrap CSS fixes for IE6 -->
+		<!--[if lt IE 7]><link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-ie6.min.css"><![endif]-->
+		<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+		<link rel="stylesheet" href="classes/Jupload/css/jquery.fileupload-ui.css">
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+		<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+		<script src="classes/Jupload/js/vendor/jquery.ui.widget.js"></script>
+		<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+		<script src="classes/Jupload/js/jquery.iframe-transport.js"></script>
+		<!-- The basic File Upload plugin -->
+		<script src="classes/Jupload/js/jquery.fileupload.js"></script>
+        <script type="text/javascript" src="editor/handle-file.js"></script>
+        <script type="text/javascript" src="editor/editor-info.js"></script>
+		<script type="text/javascript" src="classes/Validate/inputValue.js"></script>
+		
+		<link type="text/css" rel="stylesheet" href="../classes/jquery-ui/css/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
+
+		<style type="text/css">
+			body {
+
+				margin: 0 auto;
+				font-size: 1em;
+			}
+			
+			img {
+				max-width: 100px;
+				max-height:100px;
+			}
+
+		</style>
+
+	</head>
+	<body>
+
+		<header>
+			<h1>資訊檔設定</h1>
+		</header>
+
+		<p>
+			<label>版面配置</label>
+			<span>
+				<input type="radio" name="Layout" value="vertical" id="radio_Layout_0">
+				單頁 768*1024
+				<input type="radio" name="Layout" value="horizontal" id="radio_Layout_1">
+				雙頁 1024*768 </span>
+		</p>
+		<p>
+			<label>顯示名稱</label>
+			<span>
+				<input type="text" name="Name" id="text_Name">
+			</span>
+		</p>
+		<p>
+			<label>程式標籤</label>
+			<span>
+				<input type="text" name="Label" id="text_Label">
+			</span>
+		</p>
+		<p>
+			<label>顯示圖標</label>
+
+			<!-- The fileinput-button span is used to style the file input field as button -->
+			<span class="btn btn-success fileinput-button"> <i class="icon-plus icon-white"></i> <span>Select files...</span> <!-- The file input field used as target for the file upload widget -->
+				<input id="fileupload" type="file" name="files[]" multiple>
+			</span>
+			<br>
+			<br>
+			<!-- The global progress bar 
+			<div id="progress" class="progress progress-success progress-striped">
+				<div class="bar"></div>
+			</div>-->
+			<!-- The container for the uploaded files -->
+			<div id="files" class="files"></div>
+			<img id="icon" alt="圖標" src="">
+		</p>
+		<div style="clear: both"></div>
+		<p>
+			<button onclick="savePlist()">
+				儲存
+			</button>
+		</p>
+
+	</body>
+</html>

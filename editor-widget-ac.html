@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>重力感應遊戲編輯</title>
+
+		<!-- Bootstrap CSS Toolkit styles -->
+		<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap.min.css">
+		<!-- Generic page styles -->
+		<link rel="stylesheet" href="classes/Jupload/css/style.css">
+		<!-- Bootstrap styles for responsive website layout, supporting different screen sizes -->
+		<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css">
+		<link rel="stylesheet" href="classes/Jupload/css/jquery.fileupload-ui.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+		<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+		<script src="classes/Jupload/js/vendor/jquery.ui.widget.js"></script>
+		<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+		<script src="classes/Jupload/js/jquery.iframe-transport.js"></script>
+		<!-- The basic File Upload plugin -->
+		<script src="classes/Jupload/js/jquery.fileupload.js"></script>
+
+		<!-- 自己的 -->
+		<script type="text/javascript" src="editor/handle-file.js"></script>
+		<script type="text/javascript">
+			var ary_imgs = new Array("bg.jpg", "player.png", "fruit1.png", "game over.png", "play.png");
+			var int_widgetId = 0;
+			
+			int_widgetId = getValue('id');
+
+			function setLook() {
+				$('img').each(function(index) {
+					$(this).attr('src', './widgets/' + int_widgetId + '.wdgt/imgs/' + ary_imgs[index]);
+					//$(this).attr('src','./widgets/5/Default.png');
+
+				});
+			}
+
+			//html 載入完成呼叫
+			$(function() {'use strict';
+
+				setLook();
+
+				// Change this to the location of your server-side upload handler:
+				var url = (window.location.hostname === 'blueimp.github.com' || window.location.hostname === 'blueimp.github.io') ? '//jquery-file-upload.appspot.com/' : 'classes/Jupload/server/php/';
+
+				$('#wd_bg').fileupload({
+					url : url,
+					dataType : 'json',
+					done : function(e, data) {
+						$.each(data.result.files, function(index, file) {
+
+							//alert(file.name);
+							$('body').append(file.name);
+
+							var mjson = new Object();
+							mjson.wdid = 11;
+							mjson.mode = 'move';
+							mjson.data = 'data';
+							mjson.sfile = file.name;
+							mjson.dfile = 'imgs/' + ary_imgs[0];
+
+							myGet(mjson, function(data) {
+								//alert('成功回傳');
+								alert(data.json + data.id);
+								mfunction(data);
+							});
+
+						});
+					}
+				});
+
+				$('#wd_player').fileupload({
+					url : url,
+					dataType : 'json',
+					done : function(e, data) {
+						$.each(data.result.files, function(index, file) {
+
+							//alert(file.name);
+							$('body').append(file.name);
+
+							var mjson = new Object();
+							mjson.wdid = 11;
+							mjson.mode = 'move';
+							mjson.data = 'data';
+							mjson.sfile = file.name;
+							mjson.dfile = 'imgs/' + ary_imgs[1];
+
+							myGet(mjson, function(data) {
+								//alert('成功回傳');
+								alert(data.json + data.id);
+								mfunction(data);
+							});
+
+						});
+					}
+				});
+
+				$('#wd_fruit').fileupload({
+					url : url,
+					dataType : 'json',
+					done : function(e, data) {
+						$.each(data.result.files, function(index, file) {
+
+							//alert(file.name);
+							$('body').append(file.name);
+
+							var mjson = new Object();
+							mjson.wdid = 11;
+							mjson.mode = 'move';
+							mjson.data = 'data';
+							mjson.sfile = file.name;
+							mjson.dfile = 'imgs/' + ary_imgs[2];
+
+							myGet(mjson, function(data) {
+								//alert('成功回傳');
+								alert(data.json + data.id);
+								mfunction(data);
+							});
+
+						});
+					}
+				});
+
+				$('#wd_over').fileupload({
+					url : url,
+					dataType : 'json',
+					done : function(e, data) {
+						$.each(data.result.files, function(index, file) {
+
+							//alert(file.name);
+							$('body').append(file.name);
+
+							var mjson = new Object();
+							mjson.wdid = 11;
+							mjson.mode = 'move';
+							mjson.data = 'data';
+							mjson.sfile = file.name;
+							mjson.dfile = 'imgs/' + ary_imgs[3];
+
+							myGet(mjson, function(data) {
+								//alert('成功回傳');
+								alert(data.json + data.id);
+								mfunction(data);
+							});
+
+						});
+					}
+				});
+
+				$('#wd_play').fileupload({
+					url : url,
+					dataType : 'json',
+					done : function(e, data) {
+						$.each(data.result.files, function(index, file) {
+
+							//alert(file.name);
+							$('body').append(file.name);
+
+							var mjson = new Object();
+							mjson.wdid = 11;
+							mjson.mode = 'move';
+							mjson.data = 'data';
+							mjson.sfile = file.name;
+							mjson.dfile = 'imgs/' + ary_imgs[4];
+
+							myGet(mjson, function(data) {
+								//alert('成功回傳');
+								alert(data.json + data.id);
+								mfunction(data);
+							});
+
+						});
+					}
+				});
+
+			});
+
+			function myGet(mjson, mfunction) {
+				$.getJSON('editor/handle-gets.php', mjson, function(data) {
+					mfunction(data);
+				});
+			}
+
+			function getValue(varname) {
+				var url = window.location.href;
+				var qparts = url.split("?");
+				if (qparts.length == 0) {
+					return "";
+				}
+				var query = qparts[1];
+				var vars = query.split("&amp;");
+				var value = "";
+				for ( i = 0; i < vars.length; i++) {
+					var parts = vars[i].split("=");
+					if (parts[0] == varname) {
+						value = parts[1];
+						break;
+					}
+				}
+				value = unescape(value);
+				value.replace(/\+/g, " ");
+				return value;
+			};
+		</script>
+		<style type="text/css">
+			body {
+				max-width: 800px;
+				margin: 0 auto;
+				font-size: 1em;
+			}
+
+			div div img {
+				max-width: 100px;
+				max-height: 100px;
+				clear: both;
+				border: 1px dashed gray;
+				margin: 0 auto;
+			}
+
+		</style>
+	</head>
+	<body>
+		<h1>傾斜互動遊戲編輯</h1>
+		<div id="editor">
+			<div id="backeground">
+				背景
+				<span class="btn btn-success fileinput-button"> <i class="icon-plus icon-white"></i> <span>Select files...</span>
+					<input type='file' id="wd_bg">
+				</span>
+				<br />
+				<img alt="背景" src="">
+			</div>
+			<div id="player">
+				主角
+				<span class="btn btn-success fileinput-button"> <i class="icon-plus icon-white"></i> <span>Select files...</span>
+					<input type='file'id="wd_player">
+				</span>
+				<br />
+				<img alt="主角" src="">
+			</div>
+			<div id="bullet">
+				物品
+				<span class="btn btn-success fileinput-button"> <i class="icon-plus icon-white"></i> <span>Select files...</span>
+					<input type='file' id="wd_fruit">
+				</span>
+				<br />
+				<img alt="物品" src="">
+			</div>
+			<div id="gameOver">
+				結束畫面
+				<span class="btn btn-success fileinput-button"> <i class="icon-plus icon-white"></i> <span>Select files...</span>
+					<input type='file' id="wd_over">
+				</span>
+				<br />
+				<img alt="結束畫面" src="">
+			</div>
+			<div id="gameStart">
+				開始按鈕
+				<span class="btn btn-success fileinput-button"> <i class="icon-plus icon-white"></i> <span>Select files...</span>
+					<input type='file' id="wd_play">
+				</span>
+				<br />
+				<img alt="結束畫面" src="">
+			</div>
+		</div>
+	</body>
+</html>
