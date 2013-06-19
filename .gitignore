@@ -7,11 +7,13 @@
 .metadata
 bin/
 tmp/
+classes/
 *.tmp
 *.bak
 *.swp
 *~.nib
 *.zip
+*.wdgt
 local.properties
 .classpath
 .settings/
