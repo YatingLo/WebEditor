@@ -23,6 +23,58 @@ $aResult = array("data" => "預設", "id" => "$int_widgetId");
 $path_widget = "../widgets/$int_widgetId.wdgt/Info.plist";
 
 /*
+ * 新增widget列表
+ * 刪除後重新查詢再傳回列表
+*/
+if (isset($_GET['mode']) && $_GET['mode'] === "insert_widget") {
+	if(isset($_GET['name']))
+		$sName = $_GET['name'];
+	if(isset($_GET['type']))
+		$iType = $_GET['type'];
+	
+	//資料庫新增 
+	$dbHandle = new HandleDB;
+	$newId = $dbHandle->sql_insert_widget($sName, $iType);
+	//複製範本
+	$fileHandle = new HandleFile;
+	$fileHandle->file_copy_sample($newId, $iType);
+	
+	//重新查詢
+	$query = "SELECT * FROM wd_widgets";
+	$result = mysql_query($query) or die(mysql_error());
+	
+	while($row=mysql_fetch_assoc($result)){
+		$output[]=$row;
+	}
+	print(json_encode($output));
+	exit();
+}//get end
+
+/*
+ *刪除widget列表
+ * 刪除後重新查詢再傳回列表
+*/
+if (isset($_GET['mode']) && $_GET['mode'] === "delete_widget") {
+
+	$dbHandle = new HandleDB;
+	$query = "DELETE FROM wd_widgets WHERE id = $iId";
+	$result = mysql_query($query) or die(mysql_error());
+	
+	//刪除資料夾
+	$fileHandle = new HandleFile;
+	$fileHandle->project_delete($iId);
+	
+	$query = "SELECT * FROM wd_widgets";
+	$result = mysql_query($query) or die(mysql_error());
+	
+	while($row=mysql_fetch_assoc($result)){
+		$output[]=$row;
+	}
+	print(json_encode($output));
+	exit();
+}//get end
+
+/*
  *取widget列表
 */
 if (isset($_GET['mode']) && $_GET['mode'] === "table_widget") {

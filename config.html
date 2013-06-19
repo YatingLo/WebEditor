@@ -32,9 +32,9 @@
 				//data_send.wdid = iWidgetId;
 				data_send.mode = 'table_widget'; 
 				myGet(data_send, function (data){
-					alert("回傳資料："+data.length);
+					//alert("回傳資料："+data.length);
 					//alert("data:"+data[0].data);
-					$('body').append(JSON.stringify(data));
+					//$('body').append(JSON.stringify(data));
 
 					//alert("回傳資料：");
 					showTable(data);
@@ -42,7 +42,7 @@
 			}
 			
 			function showTable(data) {
-				var list;
+				var list = "";
 				for(var i = 0;i < data.length; ++i) {
 					list = list + '<li><div class="id">'+data[i].id+'</div>'+
 					'<div class="name">'+data[i].name+'</div>'+
@@ -57,12 +57,48 @@
 			}
 			
 			function deleteWidget(id){
-				alert('刪除id:'+id);
+				//alert('刪除id:'+id);
+				//刪除
+				var data_send = new Object();
+				data_send.wdid = id;
+				data_send.mode = 'delete_widget'; 
+				myGet(data_send, function (data){
+					//alert("回傳資料："+data.length);
+					//alert("data:"+data[0].data);
+					//$('body').append(JSON.stringify(data));
+
+					//alert("回傳資料：");
+					showTable(data);
+				});
 			}
 			
 			function editWidget(id, type){
-				alert('編輯id:'+id+'type:'+type);
+				//alert('編輯id:'+id+'type:'+type);
+				var link = "editor.html?id="+id+"&type="+type;
+				window.open(link,"_self")
 			}
+			
+			function newWidget(){
+				var name = $('#name').val();
+				var type = $('#type').val();
+				//alert('新增name:'+name+'type:'+type);
+				
+				//新增
+				var data_send = new Object();
+				//data_send.wdid = id;
+				data_send.mode = 'insert_widget';
+				data_send.name = name;
+				data_send.type = type;
+				myGet(data_send, function (data){
+					//alert("回傳資料："+data.length);
+					//alert("data:"+data[0].data);
+					//$('body').append(JSON.stringify(data));
+
+					//alert("回傳資料：");
+					showTable(data);
+				});
+			}
+			
 			
 			function myGet(mjson, mfunction) {
 				$.getJSON('editor/handle-gets.php', mjson, function(data) {
@@ -92,11 +128,12 @@
         	<span class="id">id</span>
             <span>
             <input id="name" type="text" style="width:150px"></span>
-            <span><select id="type">
+            <span>
+            <select id="type">
             <option value="1">自我測驗</option>
             <option value="2">傾斜遊戲</optoin>
             </select></span>
-            <button>新增</button>
+            <button onclick="newWidget()">新增</button>
         </div>
         <div class="list">
         <ul>

@@ -6,7 +6,7 @@
 class HandleFile{
 	//widget的id,type,目的檔案名稱，來源檔案名稱
 	var $id, $type, $dFileName, $sFileName;
-	var $aType;
+	var $aType = array("","sample_quiz","sample_fruit");
 	
 	public function HandleFile(){
 		
