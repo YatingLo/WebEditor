@@ -15,6 +15,7 @@ var oldLoad = window.onload || function() {
 window.onload = function() {
 	$('#quiz_restart').click(fun_restart);
 	$('#quiz_check').click(fun_checkAns);
+	$('#quiz_check').show();
 	$('#quiz_sendResult').click(fun_sendResult);
 	$('#quiz_result').hide();
 	$('div.quiz_ans').hide();

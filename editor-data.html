@@ -19,8 +19,8 @@
 				//alert('test');
 				
 				var iWidgetId = 0;
-				if(getValue('id'))
-					iWidgetId = getValue('id');
+				if(getValue('ID'))
+					iWidgetId = getValue('ID');
 				
 				alert('id:'+iWidgetId);
 				
@@ -40,7 +40,9 @@
 					//$('body').append(JSON.stringify(data));
 
 					//alert("回傳資料：");
-					showTable(data);
+					if(data.length > 0){
+						showTable(data);
+					}
 				});
 			}
 			
@@ -65,7 +67,9 @@
 					//$('body').append(JSON.stringify(data));
 					//loadTable(iWidgetId);
 					//alert("回傳資料："+getValue('id'));
+
 					loadTable(getValue('id'));
+
 					//showTable(data);
 				});
 			}
@@ -101,6 +105,6 @@
 	</head>
 
 	<body>
-
+	無任何上傳資料
 	</body>
 </html>

@@ -22,31 +22,7 @@
 			window.onload = function() {
 				oldLoad();
 				
-				var mjson = new Object();
-				mjson.wdid = 1;
-				mjson.mode = 'test';
-				mjson.data = 'data';
-				mjson.sfile = 'sfile';
-				mjson.dfile = 'dfile';
 				
-				/*
-				$.getJSON('editor/handle-gets.php', mjson, function(data) {
-					 alert('成功回傳');
-					 alert(data.json);
-				});
-				*/
-				/*
-				$.ajax({
-					type: 'POST', 
-					url: 'editor/handle-gets.php', 
-					crossDomain: true,
-					dataType: 'json',
-					data: 'action=sum&param1=' + param1 + '&param2=' + param2,
-					success: function(json) {
-						// and evoke client's function
-						alert('as;ldfkj;');
-					} 
-				});*/
 			};
 			
 			function myGet(mjson, mfunction){

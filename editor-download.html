@@ -11,17 +11,17 @@
 		<script type="text/javascript">
 			var ob_pro = new Object();
 			ob_pro.wdid = 0;
+			
+			$(document).ready(function (){
 
-			$(function() {'use strict';
-				//var int_wdid = 0;
-
-				if (getValue('id') != "")
-					ob_pro.wdid = getValue('id');
+				if (getValue('ID') != "")
+					ob_pro.wdid = getValue('ID');
+				//alert(ob_pro.wdid);
 					
-				var demoLink = './widgets/'+ob_pro.wdid+'.wdgt/index.html';
+				var demoLink = 'widgets/'+ob_pro.wdid+'.wdgt/index.html';
 				$('#demo').attr('src',demoLink);
 
-				alert(ob_pro.wdid);
+				//alert(ob_pro.wdid);
 				$('#test').click(function() {
 					sendClick(ob_pro.wdid);
 				});
@@ -34,7 +34,7 @@
 				mjson.mode = 'down';
 				mjson.data = 'test';
 
-				alert('click');
+				//alert('click');
 
 				myGet(mjson, function(data) {
 					//alert('成功回傳'+data.json);
@@ -68,7 +68,7 @@
 				value = unescape(value);
 				value.replace(/\+/g, " ");
 				return value;
-			};
+			}
 		</script>
 	</head>
 
@@ -79,6 +79,6 @@
 			</button>
 			<span id='backLink'></span>
 		</div>
-			<iframe id="demo" src="./widgets/11.wdgt/index.html" width="768" height="1000" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>
+			<iframe id="demo" src="#" width="768" height="1000" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>
 	</body>
 </html>

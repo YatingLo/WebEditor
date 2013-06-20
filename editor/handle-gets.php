@@ -23,6 +23,22 @@ $aResult = array("data" => "預設", "id" => "$int_widgetId");
 $path_widget = "../widgets/$int_widgetId.wdgt/Info.plist";
 
 /*
+ *save html
+*/
+if (isset($_GET['mode']) && $_GET['mode'] === "save_html") {
+	if(isset($_GET['data']))
+		$sData = $_GET['data'];
+	
+	$fileHandle = new HandleFile;
+	$fileHandle->file_save_html($iId, $sData);
+
+	//$post_data = array("json"=>"$sName, $dName, $iId","id"=>1);
+	$post_data = array("json"=>$sData,"id"=>$iId);
+	echo json_encode($post_data);
+	exit();
+}//get end
+
+/*
  * 新增widget列表
  * 刪除後重新查詢再傳回列表
 */

@@ -96,8 +96,8 @@ var oldLoad = window.onload || function() {
 window.onload = function() {
 	oldLoad();
 
-	alert(getValue('id'));
-	if(getValue('id') != ""){
+	//alert(getValue('ID'));
+	if(getValue('ID') != ""){
 		int_WidgetId = getValue('id');
 	}
 	/*

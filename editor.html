@@ -1,8 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<?php
-	$int_widgetId = 0;
-	$int_widgetType = 0; 
-?>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,23 +11,61 @@
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="style/header.css" />
 
 		<!-- 自己的 -->
 		<script type="text/javascript">
+		var wid = 0;
+		var wtype = 1;
+		
+		
 			var oldLoad = window.onload ||
 			function() {};
 			window.onload = function() {
 				oldLoad();
+				
+				if(getValue('ID'))
+					wid = getValue('ID');
+				if(getValue('TYPE'))
+					wtype = getValue('TYPE');
+					
+				//alert('id='+wid+'&wtype='+wtype);
 
 				$('#tabs').tabs();
 				
-				$('div#tabs-1').html('<iframe class="demo" src="editor-info.html" width="800" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
-				$('div#tabs-2').html('<iframe class="demo" src="editor-widget-ac.html" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
-				$('div#tabs-3').html('<iframe class="demo" src="editor-download.html" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
-				$('div#tabs-4').html('<iframe class="demo" src="editor-data.html" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
+				$('div#tabs-1').html('<iframe class="demo" src="editor-info.html?ID='+wid+'" width="800" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
+				if(wtype == 1) {
+					$('div#tabs-2').html('<iframe class="demo" src="editor-widget-quiz.html?ID='+wid+'" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
+				}else {
+					$('div#tabs-2').html('<iframe class="demo" src="editor-widget-ac.html?ID='+wid+'" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
+				}
+				$('div#tabs-3').click().html('<iframe class="demo" src="editor-download.html?ID='+wid+'" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
+				$('div#tabs-4').html('<iframe class="demo" src="editor-data.html?ID='+wid+'" width="810" height="600" marginwidth="0" #marginheight="0" #scrolling="no" frameborder="0" align="center"></iframe>');
 				var contentH = $('.demo').height();
 				$('.demo').attr('height',contentH);
 			};
+			
+			function getValue(varname) {
+				var url = window.location.href;
+				var qparts = url.split("?");
+				if (qparts.length == 0) {
+					return "";
+				}
+				var query = qparts[1];
+				var vars = query.split('&');
+				var value = "";
+				for ( i = 0; i < vars.length; i++) {
+					var parts = vars[i].split("=");
+					if (parts[0] == varname) {
+						value = parts[1];
+						break;
+					}
+				}
+				value = unescape(value);
+				value.replace(/\+/g, " ");
+				return value;
+			}
 		</script>
 
 		<style type="text/css">
@@ -44,10 +78,21 @@
 		</style>
 	</head>
 	<body>
-
+		<div id="warp">
 		<header>
-			<h1>多媒體部件編輯</h1>
-		</header>
+                <h1>My Widget</h1>
+        		<h4>我的多媒體部件</h4>
+      	</header>
+		
+		<nav>
+              <ul>
+                    <a href="index.html"><li>系統介紹</li></a>
+                    <a href="intro.html"><li>使用說明</li></a>
+                    <a href="config.html"><li>編輯管理</li></a>
+                    <a href="link.html"><li>相關資源</li></a>
+               </ul>
+               <div style="clear:both"></div>
+        </nav>
 
 		<div id="content" style="float: left">
 
@@ -81,5 +126,6 @@
 				</div>
 		  </div>
 		</div>
+		</div><!--warper end-->
 	</body>
 </html>
